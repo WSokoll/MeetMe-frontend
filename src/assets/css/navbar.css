@@ -1,0 +1,15 @@
+.navbar {
+    background: transparent;
+    backdrop-filter: blur(20px);
+}
+
+nav .navbar-nav li a{
+    color: white !important;
+}
+nav .nav-link {
+    text-decoration: none;
+    font-weight: 600;
+}
+nav .nav-link:hover {
+    text-decoration: underline;
+}
