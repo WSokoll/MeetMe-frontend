@@ -97,3 +97,11 @@ input:not(:placeholder-shown) ~ label{
 .register-link p a:hover, .login-link p a:hover{
   text-decoration: underline;
 }
+
+.error-message-box{
+  font-size: .9em;
+  text-align: center;
+  margin: 15px 0 5px;
+  color: #ff0000;
+  font-weight: 600;
+}
