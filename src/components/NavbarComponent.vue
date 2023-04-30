@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg border-bottom mb-2">
+  <nav class="navbar navbar-expand-lg border-bottom">
     <div class="container-fluid mx-3">
       <router-link to="/" class="navbar-brand">
         <img alt="MeetMe" src="../assets/img/logo.png" width="170" height="24">
