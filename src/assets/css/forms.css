@@ -3,7 +3,11 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    width: 100%;  
+    width: 100%;
+}
+
+.form-section-register{
+  margin-top: 30px;
 }
 
 .form-box{
