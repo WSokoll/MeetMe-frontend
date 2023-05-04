@@ -1,5 +1,5 @@
 <template>
-    <section class="form-section">
+    <section class="form-section form-section-register">
       <div class="form-box form-box-register">
         <div class="form-value">
           <form action="" onsubmit="return false;">

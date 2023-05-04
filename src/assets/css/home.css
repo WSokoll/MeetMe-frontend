@@ -1,0 +1,71 @@
+.search-navbar{
+    filter: brightness(130%);
+    height: 60px;
+}
+
+.search-input{
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    text-indent: 15px;
+    margin: 0 0 0 30px;
+    width: 400px;
+}
+
+.when-select{
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    text-indent: 15px;
+    margin: 0 0 0 10px;
+    width: 140px;
+}
+
+.search-button{
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0 0 0 10px;
+}
+
+.results-wrapper{
+    min-height: calc(100vh - 117px);
+    width: 100%;  
+}
+
+.results-container{
+    width: 50vw;
+    min-height: calc(100vh - 117px);
+    max-height: calc(100vh - 117px);
+    float: left;
+    overflow-y: scroll;
+    
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.results-container::-webkit-scrollbar {
+    display: none;
+}
+
+.result-card{
+    background: #E7E7E7;
+    /* backdrop-filter: brightness(500%) blur(20px); */
+    cursor: pointer;
+}
+
+.results-ticket-info-tag{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    font-size: 0.8em;
+}
+
+.map-container{
+    width: 50vw;
+    height: calc(100vh - 117px);
+    float: right;
+}
