@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <form action="" class="d-flex" role="search" onsubmit="return false;">
         <input v-model="query" class="search-input" type="text" placeholder="Search" required>
-        <select class="when-select">
+        <select v-model="when" class="when-select">
           <option value="" disabled selected>When</option>
           <option value="today">Today</option>
           <option value="tomorrow">Tomorrow</option>
@@ -37,6 +37,10 @@
           <div class="col-10">
             <div class="card-body">
               {{ item.title }}
+              <div v-if="item.ticket_info" class="results-ticket-info-tag">
+                <i class="bi bi-ticket-detailed" style="margin-right: 5px; color: green"></i>
+                <span>Tickets available now!</span>
+              </div>
             </div>
           </div>
         </div>
@@ -54,7 +58,7 @@
           layer-type="base"
           name="OpenStreetMap"
         ></l-tile-layer>
-        <l-marker v-for="item in results" :key="item.id" :lat-lng="item.coordinates" @click="showEventDetails(item)">
+        <l-marker v-for="item in results" :key="item.id" :lat-lng="JSON.parse(item.coordinates)" @click="showEventDetails(item)">
           <l-tooltip>{{ item.venue ? item.venue.name : item.title }}</l-tooltip>
         </l-marker>
       </l-map>
@@ -84,6 +88,7 @@ export default {
       resultsShown: false,
       loading: false,
       query: '',
+      when: '',
       results: [],
       showDetails: false,
       resultDetails: {},
@@ -98,14 +103,21 @@ export default {
 
         this.loading = true;
         let q = this.query.trim().replace(/ /g, "+");
+        
+        let params = {};
+        if (this.when !== '') {
+          params = {
+            q: q,
+            date: this.when
+          }
+        } else {
+          params = {
+            q: q
+          }
+        }
 
         this.axios.get(
-          this.$config.BACKEND_URL + "/events",
-          {
-            params: {
-              q: q
-            }
-          }
+          this.$config.BACKEND_URL + "/events", {params: params}
         )
         .then((response) => {
           this.results = response.data;
@@ -117,11 +129,12 @@ export default {
             let pin = L.marker(this.results[i].coordinates).bindPopup(this.results[i].title);
             pin.addTo(pinLayer);
          
-            arrayOfLatLngs.push(this.results[i].coordinates);
+            arrayOfLatLngs.push(JSON.parse(this.results[i].coordinates));
           }
+
           let bounds = new L.LatLngBounds(arrayOfLatLngs);
           this.center = [(bounds.getNorth() + bounds.getSouth())/2, (bounds.getEast() + bounds.getWest())/2]
-          
+
           this.resultsShown = true;
           this.loading = false;
         })

@@ -21,3 +21,10 @@
     text-align: left;
     margin-top: 10px;
 }
+
+.details-down-icon{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+}

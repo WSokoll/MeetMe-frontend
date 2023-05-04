@@ -39,7 +39,7 @@
     min-height: calc(100vh - 117px);
     max-height: calc(100vh - 117px);
     float: left;
-    overflow-y: hidden;
+    overflow-y: scroll;
     
     /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;  /* IE and Edge */
@@ -54,6 +54,14 @@
     background: #E7E7E7;
     /* backdrop-filter: brightness(500%) blur(20px); */
     cursor: pointer;
+}
+
+.results-ticket-info-tag{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    font-size: 0.8em;
 }
 
 .map-container{
