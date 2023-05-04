@@ -47,8 +47,8 @@
       <SearchDetailsComponent :result="resultDetails" />
     </div>
 
-    <div class="map-container" v-if="bounds != null">
-      <l-map ref="map" v-model:zoom="zoom" :bounds="bounds" :center="center">
+    <div class="map-container">
+      <l-map ref="map" v-model:zoom="zoom" :center="center">
         <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           layer-type="base"
@@ -88,8 +88,7 @@ export default {
       showDetails: false,
       resultDetails: {},
       zoom: 11,
-      center: [50.067437, 19.916022],
-      bounds: null,
+      center: [50.067437, 19.916022]
     }
   },
   methods: {
@@ -120,8 +119,8 @@ export default {
          
             arrayOfLatLngs.push(this.results[i].coordinates);
           }
-          this.bounds = new L.LatLngBounds(arrayOfLatLngs);
-          this.center = [(this.bounds.getNorth() + this.bounds.getSouth())/2, (this.bounds.getEast() + this.bounds.getWest())/2]
+          let bounds = new L.LatLngBounds(arrayOfLatLngs);
+          this.center = [(bounds.getNorth() + bounds.getSouth())/2, (bounds.getEast() + bounds.getWest())/2]
           
           this.resultsShown = true;
           this.loading = false;
