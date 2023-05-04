@@ -1,0 +1,23 @@
+.details-card{
+    background: #E7E7E7;
+    border: none;
+    outline: none;
+    max-height: calc(100vh - 147px);
+    min-height: calc(100vh - 147px);
+    margin-top: 15px;
+    overflow-y: scroll;
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+} 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.details-card::-webkit-scrollbar {
+    display: none;
+}
+
+.details-title{
+    font-size: 1.6em;
+    text-align: left;
+    margin-top: 10px;
+}
