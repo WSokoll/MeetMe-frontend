@@ -2,7 +2,7 @@
   <section class="form-section">
     <div class="form-box form-box-login">
       <div class="form-value">
-        <form action="">
+        <form action="" onsubmit="return false;">
           <h2 class="form-title">Login</h2>
           <div v-if="this.$route.query.registered" class="form-message">
             Please confirm your account through email before logging in.

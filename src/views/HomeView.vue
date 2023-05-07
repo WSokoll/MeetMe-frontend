@@ -173,9 +173,6 @@ export default {
   }
 }
 
-// async function searchEvents(query) {
-  
-// } 
 </script>
 
 <style src="@/assets/css/home.css"></style>
