@@ -22,7 +22,7 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run serve -- --port 8089
 ```
 It is recommended to run the backend application on the port 8080, so the default port can be changed as in the example below.
 ```
