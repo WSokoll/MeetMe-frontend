@@ -13,6 +13,8 @@ This project is a frontend application built using the Vue.js framework. It is m
 ```
 npm install
 ```
+### Connection to the backend application
+In order for app to work correctly, the *public/config.json* file has to be edited. The file should contain `BACKEND_URL` variable with the correct value assigned (for example: `http://localhost:8080`).
 
 ### Compiles and hot-reloads for development
 ```
