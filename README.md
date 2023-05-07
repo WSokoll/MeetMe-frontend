@@ -39,7 +39,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## Technology stack
  - Vue.js 3
  - CSS
- - HTML 5
+ - HTML5
  - Leaflet
 
 ## Credit
