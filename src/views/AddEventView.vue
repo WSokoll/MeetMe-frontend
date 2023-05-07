@@ -148,7 +148,8 @@
                 description: this.description,
                 where: this.where,
                 when: this.when,
-                photo: this.photoLink
+                photo: this.photoLink,
+                coordinates: this.coordinates
             };
 
             if (ticket_info.length !== 0) {
