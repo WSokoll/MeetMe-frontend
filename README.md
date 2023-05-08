@@ -45,4 +45,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
  - Leaflet
 
 ## Credit
- - Icon - [Image by rawpixel.com](https://www.freepik.com/free-photo/stunning-blurred-light-abstract_2861800.htm#query=event&position=46&from_view=search&track=sph) on Freepik
+ - Background image - [Image by rawpixel.com](https://www.freepik.com/free-photo/stunning-blurred-light-abstract_2861800.htm#query=event&position=46&from_view=search&track=sph) on Freepik
