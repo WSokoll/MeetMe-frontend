@@ -12,6 +12,11 @@
           <option value="month">This month</option>
           <option value="next_month">Next month</option>
         </select>
+        <select v-model="eventType" class="event-type-select">
+          <option value="" disabled selected>Event type</option>
+          <option value="public">Public</option>
+          <option value="priv">Private</option>
+        </select>
         <button v-if="!loading" @click="searchEvents(true)" type="submit" class="btn btn-light search-button">
           <i class="bi bi-search"></i>
           Search
@@ -25,7 +30,10 @@
     </div>
   </div>
   
-  <div v-if="!resultsShown" class="results-wrapper"></div>
+  <div v-if="noResults" class="results-wrapper">
+    <h2 class="text-center my-4" style="color: white">We are sorry, no events matching Your criteria were found</h2>
+  </div>
+  <div v-else-if="!resultsShown" class="results-wrapper"></div>
   <div v-else class="results-wrapper">
 
     <div v-if="!showDetails" class="results-container">
@@ -91,6 +99,7 @@ export default {
   data() {
     return {
       resultsShown: false,
+      noResults: false,
       loading: false,
 
       moreLoading: true,
@@ -98,6 +107,7 @@ export default {
 
       query: '',
       when: '',
+      eventType: '',
 
       results: [],
       showDetails: false,
@@ -133,27 +143,36 @@ export default {
         }
 
         if (!newSearch) {
-          params['q..'] = this.loadMore;
+          params['page'] = this.loadMore;
+        }
+
+        if (this.eventType == 'priv') {
+          params['priv'] = true;
         }
 
         this.axios.get(
           this.$config.BACKEND_URL + "/events", {params: params}
         )
         .then((response) => {
-          if (newSearch) {
-            this.results = response.data;
+          if (response.data.length !== 0) {
+            if (newSearch) {
+              this.results = response.data;
+            } else {
+              this.results.push.apply(this.results, response.data);
+            }
+          
+            for (let i in this.results) {
+              this.arrayOfLatLngs.push(JSON.parse(this.results[i].coordinates));
+            }
+
+            let bounds = new L.LatLngBounds(this.arrayOfLatLngs);
+            this.center = [(bounds.getNorth() + bounds.getSouth())/2, (bounds.getEast() + bounds.getWest())/2]
+
+            this.resultsShown = true;
           } else {
-            this.results.push.apply(this.results, response.data);
-          }
-        
-          for (let i in this.results) {
-            this.arrayOfLatLngs.push(JSON.parse(this.results[i].coordinates));
+            this.noResults = true;
           }
 
-          let bounds = new L.LatLngBounds(this.arrayOfLatLngs);
-          this.center = [(bounds.getNorth() + bounds.getSouth())/2, (bounds.getEast() + bounds.getWest())/2]
-
-          this.resultsShown = true;
           this.loading = false;
           this.moreLoading = false;
         })

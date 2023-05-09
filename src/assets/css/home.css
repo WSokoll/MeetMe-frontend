@@ -16,9 +16,18 @@
     border-radius: 40px;
     border: none;
     outline: none;
-    text-indent: 8px;
+    text-indent: 10px;
     margin: 0 0 0 10px;
     width: 140px;
+}
+
+.event-type-select {
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    text-indent: 10px;
+    margin: 0 0 0 10px;
+    width: 120px;
 }
 
 .search-button {
