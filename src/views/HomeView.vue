@@ -12,7 +12,7 @@
           <option value="month">This month</option>
           <option value="next_month">Next month</option>
         </select>
-        <button v-if="!loading" @click="searchEvents" type="submit" class="btn btn-light search-button">
+        <button v-if="!loading" @click="searchEvents(true)" type="submit" class="btn btn-light search-button">
           <i class="bi bi-search"></i>
           Search
         </button>
@@ -45,6 +45,11 @@
           </div>
         </div>
       </div>
+      <button v-if="!moreLoading" @click="searchEvents(false);" class="btn btn-light load-more-button">Load more</button>
+      <button v-else class="btn btn-light load-more-button">
+        <span style="margin-left: 5px; margin-right: 10px">Load more</span>
+        <div class="spinner-border float-end" style="height: 22px; width: 22px" role="status"></div>
+      </button>
     </div>
 
     <div v-else class="results-container">
@@ -87,56 +92,70 @@ export default {
     return {
       resultsShown: false,
       loading: false,
+
+      moreLoading: true,
+      loadMore: 0,
+
       query: '',
       when: '',
+
       results: [],
       showDetails: false,
       resultDetails: {},
+
       zoom: 11,
-      center: [50.067437, 19.916022]
+      center: [50.067437, 19.916022],
+      arrayOfLatLngs: []
     }
   },
   methods: {
-    searchEvents() {
+    searchEvents(newSearch) {
       if (this.query != '') {
         this.resetDetails();
-
-        this.loading = true;
-        let q = this.query.trim().replace(/ /g, "+");
         
-        let params = {};
-        if (this.when !== '') {
-          params = {
-            q: q,
-            date: this.when
-          }
+        if (newSearch) {
+          this.loading = true;
+
+          // reset values connected to loading more events
+          this.arrayOfLatLngs = [];
+          this.loadMore = 0;
         } else {
-          params = {
-            q: q
-          }
+          this.loadMore += 10;
+          this.moreLoading = true;
+        }
+        
+        let params = {
+          q: this.query.trim().replace(/ /g, "+")
+        };
+
+        if (this.when !== '') {
+          params['date'] = this.when;
+        }
+
+        if (!newSearch) {
+          params['q..'] = this.loadMore;
         }
 
         this.axios.get(
           this.$config.BACKEND_URL + "/events", {params: params}
         )
         .then((response) => {
-          this.results = response.data;
-          
-          let pinLayer = L.layerGroup();
-          let arrayOfLatLngs = [];
+          if (newSearch) {
+            this.results = response.data;
+          } else {
+            this.results.push.apply(this.results, response.data);
+          }
         
           for (let i in this.results) {
-            let pin = L.marker(this.results[i].coordinates).bindPopup(this.results[i].title);
-            pin.addTo(pinLayer);
-         
-            arrayOfLatLngs.push(JSON.parse(this.results[i].coordinates));
+            this.arrayOfLatLngs.push(JSON.parse(this.results[i].coordinates));
           }
 
-          let bounds = new L.LatLngBounds(arrayOfLatLngs);
+          let bounds = new L.LatLngBounds(this.arrayOfLatLngs);
           this.center = [(bounds.getNorth() + bounds.getSouth())/2, (bounds.getEast() + bounds.getWest())/2]
 
           this.resultsShown = true;
           this.loading = false;
+          this.moreLoading = false;
         })
         .catch(error => {
           this.loading = false;

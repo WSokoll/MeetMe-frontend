@@ -63,7 +63,8 @@ export default {
         }
       )
       .then(() => {
-        this.$router.push({path: 'home'})
+        this.$router.push('/home');
+        this.loading = false;
       })
       .catch(error => {
         this.loading = false;

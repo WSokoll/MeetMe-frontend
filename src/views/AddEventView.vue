@@ -34,9 +34,10 @@
 
                 <div class="add-form-inputbox">
                     <span v-for="index in ticketsCount" :key="index">
-                        <input :id="'sourceInput' + index" style="width: 30%;" type="text" placeholder="source">
-                        <input :id="'linkInput' + index" style="width: 60%;" type="text" placeholder="link">
+                        <input :ref="'sourceInput' + index" style="width: 30%;" type="text" placeholder="source">
+                        <input :ref="'linkInput' + index" style="width: 60%;" type="text" placeholder="link">
                         <i v-if="index == ticketsCount" @click="addTicket" class="bi bi-plus-circle" style="cursor: pointer;"></i>
+                        <i v-if="index == ticketsCount && ticketsCount > 1" @click="deleteTicket" class="bi bi-dash-circle" style="cursor: pointer; margin-left: 5px;"></i>
                     </span>
                     
                     <label for="" style="top: -5px;">Tickets <span class="text-muted" style="font-size: 0.7em;">(optional)</span></label>
@@ -88,6 +89,12 @@
         loading: false
       }
     },
+    beforeCreate() {
+        // make sure user is logged in
+
+        // this.$router.push('/login');
+
+    },
     created() {
         // get current location and use it for centering map if access granted
         const success = (position) => {
@@ -128,12 +135,17 @@
         addTicket() {
             this.ticketsCount += 1;
         },
+        deleteTicket() {
+            this.ticketsCount -= 1;
+        },
         addEvent() {
+            this.loading = true;
+
             // check ticket info
             let ticket_info = [];
             for (let i = 0; i < this.ticketsCount; i++) {
-                let source = document.getElementById("sourceInput" + (i + 1).toString()).value;
-                let link = document.getElementById("linkInput" + (i + 1).toString()).value;
+                let source = this.$refs["sourceInput" + (i + 1).toString()][0].value;
+                let link = this.$refs["linkInput" + (i + 1).toString()][0].value;
 
                 if (source !== '' && link !== '') {
                     ticket_info.push({
@@ -146,19 +158,53 @@
             let eventData = {
                 title: this.title,
                 description: this.description,
-                where: this.where,
-                when: this.when,
-                photo: this.photoLink,
-                coordinates: this.coordinates
+                location: this.where,
+                date: this.when.toString(),
+                photoLink: this.photoLink,
+                Lng: this.coordinates[0],
+                Lat: this.coordinates[1]
             };
 
             if (ticket_info.length !== 0) {
-                eventData['ticket_info'] = ticket_info;
+                eventData['ticketInfo'] = ticket_info;
             }
 
             if (this.website !== '') {
                 eventData['link'] = this.website;
             }
+
+            this.axios.post(
+                this.$config.BACKEND_URL + "/events/add", eventData, {
+                headers: {
+                    "Content-Type": "application/json"
+                }}
+            )
+            .then(() => {
+                this.$router.push('/home');
+                this.loading = false;
+            })
+            .catch(error => {
+                this.loading = false;
+                if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                this.errorMessage = error.response.data.message;
+
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser 
+                // and an instance of http.ClientRequest in node.js
+                this.errorMessage = error.request.data.message;
+
+                console.log(error.request);
+                } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                }
+            })
             
         }
     }
