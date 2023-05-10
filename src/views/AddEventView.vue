@@ -191,7 +191,7 @@
             };
 
             if (ticket_info.length !== 0) {
-                eventData['ticketInfo'] = ticket_info;
+                eventData['ticketInfo'] = ticket_info.toString();
             }
 
             if (this.website !== '') {
