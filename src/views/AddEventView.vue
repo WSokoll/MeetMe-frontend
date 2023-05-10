@@ -186,8 +186,8 @@
                 location: this.where,
                 date: this.when.toString(),
                 photoLink: this.photoLink,
-                Lng: this.coordinates[0],
-                Lat: this.coordinates[1]
+                lng: this.coordinates[0],
+                lat: this.coordinates[1]
             };
 
             if (ticket_info.length !== 0) {
@@ -197,7 +197,6 @@
             if (this.website !== '') {
                 eventData['link'] = this.website;
             }
-            console.log(eventData)
 
             this.axios.post(
                 this.$config.BACKEND_URL + "/events/add", eventData, {
