@@ -6,7 +6,7 @@
                     <img class="rounded img-fluid" style="display: block; margin: auto;" :src="result.image">
                 </div>
                 <div class="col-8">
-                    <div class="d-flex justify-content-between">
+                    <div :class="'d-flex ' + (tickets_available ? 'justify-content-between' : 'justify-content-end')">
                         <div v-if="tickets_available" class="tickets-info-header">
                             <i class="bi bi-ticket-detailed" style="margin-right: 5px; color: green"></i>
                             <span>Tickets available now</span>

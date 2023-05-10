@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import { useCookies } from "vue3-cookies";
+
 export default {
   name: 'LoginView',
   data() {
@@ -45,7 +47,10 @@ export default {
       loading: false
     }
   },
-
+  setup() {
+    const { cookies } = useCookies();
+    return { cookies };
+  },
   methods: {
     login() {
       this.loading = true;
@@ -58,11 +63,14 @@ export default {
         },
         {
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "multipart/form-data"
           }
         }
       )
       .then(() => {
+        // temporal solution - just for navbar configuration
+        this.cookies.set('logged', true);
+
         this.$router.push('/home');
         this.loading = false;
       })

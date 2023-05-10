@@ -53,8 +53,8 @@
           </div>
         </div>
       </div>
-      <button v-if="!moreLoading" @click="searchEvents(false);" class="btn btn-light load-more-button">Load more</button>
-      <button v-else class="btn btn-light load-more-button">
+      <button v-if="!moreLoading && results.length >= 10" @click="searchEvents(false);" class="btn btn-light load-more-button">Load more</button>
+      <button v-else-if="results.length >= 10" class="btn btn-light load-more-button">
         <span style="margin-left: 5px; margin-right: 10px">Load more</span>
         <div class="spinner-border float-end" style="height: 22px; width: 22px" role="status"></div>
       </button>
