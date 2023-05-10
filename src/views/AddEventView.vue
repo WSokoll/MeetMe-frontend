@@ -191,12 +191,13 @@
             };
 
             if (ticket_info.length !== 0) {
-                eventData['ticketInfo'] = ticket_info.toString();
+                eventData['ticketInfo'] = JSON.stringify(ticket_info);
             }
 
             if (this.website !== '') {
                 eventData['link'] = this.website;
             }
+            console.log(eventData)
 
             this.axios.post(
                 this.$config.BACKEND_URL + "/events/add", eventData, {
