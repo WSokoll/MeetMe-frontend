@@ -81,7 +81,7 @@
           }
         )
         .then(() => {
-          this.$router.push({path: 'login', query: {registered: true}})
+          this.$router.push({path: '/login', query: {registered: true}})
         })
         .catch(error => {
           this.loading = false;

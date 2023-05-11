@@ -2,7 +2,7 @@
   <section class="form-section">
     <div class="form-box form-box-login">
       <div class="form-value">
-        <form action="">
+        <form action="" onsubmit="return false;">
           <h2 class="form-title">Login</h2>
           <div v-if="this.$route.query.registered" class="form-message">
             Please confirm your account through email before logging in.
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import { useCookies } from "vue3-cookies";
+
 export default {
   name: 'LoginView',
   data() {
@@ -45,7 +47,10 @@ export default {
       loading: false
     }
   },
-
+  setup() {
+    const { cookies } = useCookies();
+    return { cookies };
+  },
   methods: {
     login() {
       this.loading = true;
@@ -58,12 +63,16 @@ export default {
         },
         {
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "multipart/form-data"
           }
         }
       )
       .then(() => {
-        this.$router.push({path: 'home'})
+        // temporal solution - just for navbar configuration
+        this.cookies.set('logged', true);
+
+        this.$router.push('/home');
+        this.loading = false;
       })
       .catch(error => {
         this.loading = false;

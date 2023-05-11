@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 const routes = [
   {
     path: '/',
+    alias: '/home',
     name: 'home',
     component: HomeView
   },
@@ -19,6 +20,11 @@ const routes = [
     path: '/register',
     name: 'register',
     component: () => import('../views/RegisterView.vue')
+  },
+  {
+    path: '/add/event',
+    name: 'add_event',
+    component: () => import('../views/AddEventView.vue')
   }
 ]
 

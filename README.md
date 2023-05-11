@@ -7,7 +7,7 @@ This project is a frontend application built using the Vue.js framework. It is m
  - serching for events by entering a phrase and specifying the time
  - displaying search results using a list and markers on the map
  - displaying details such as date, place, description, availability of tickets for a specific event
- - creating and adding events (only for logged in users)
+ - creating and adding events marked as private (only for logged in users)
 
 ## Project setup
 ```
@@ -43,6 +43,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
  - CSS
  - HTML5
  - Leaflet
+
+## Authors
+ - [Władysław Sokołowski](https://github.com/WSokoll)
+ - [Kamil Radłowski](https://github.com/Camil458)
 
 ## Credit
  - Background image - [Image by rawpixel.com](https://www.freepik.com/free-photo/stunning-blurred-light-abstract_2861800.htm#query=event&position=46&from_view=search&track=sph) on Freepik

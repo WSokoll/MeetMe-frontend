@@ -1,9 +1,9 @@
-.search-navbar{
+.search-navbar {
     filter: brightness(130%);
     height: 60px;
 }
 
-.search-input{
+.search-input {
     border-radius: 40px;
     border: none;
     outline: none;
@@ -12,16 +12,25 @@
     width: 400px;
 }
 
-.when-select{
+.when-select {
     border-radius: 40px;
     border: none;
     outline: none;
-    text-indent: 15px;
+    text-indent: 10px;
     margin: 0 0 0 10px;
     width: 140px;
 }
 
-.search-button{
+.event-type-select {
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    text-indent: 10px;
+    margin: 0 0 0 10px;
+    width: 120px;
+}
+
+.search-button {
     border-radius: 40px;
     border: none;
     outline: none;
@@ -29,12 +38,21 @@
     margin: 0 0 0 10px;
 }
 
-.results-wrapper{
+.load-more-button {
+    display: block;
+    margin: 0 auto 10px auto;
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.results-wrapper {
     min-height: calc(100vh - 117px);
     width: 100%;  
 }
 
-.results-container{
+.results-container {
     width: 50vw;
     min-height: calc(100vh - 117px);
     max-height: calc(100vh - 117px);
@@ -50,13 +68,13 @@
     display: none;
 }
 
-.result-card{
+.result-card {
     background: #E7E7E7;
     /* backdrop-filter: brightness(500%) blur(20px); */
     cursor: pointer;
 }
 
-.results-ticket-info-tag{
+.results-ticket-info-tag {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -64,7 +82,7 @@
     font-size: 0.8em;
 }
 
-.map-container{
+.map-container {
     width: 50vw;
     height: calc(100vh - 117px);
     float: right;

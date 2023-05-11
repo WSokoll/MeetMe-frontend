@@ -6,7 +6,7 @@
                     <img class="rounded img-fluid" style="display: block; margin: auto;" :src="result.image">
                 </div>
                 <div class="col-8">
-                    <div class="d-flex justify-content-between">
+                    <div :class="'d-flex ' + (tickets_available ? 'justify-content-between' : 'justify-content-end')">
                         <div v-if="tickets_available" class="tickets-info-header">
                             <i class="bi bi-ticket-detailed" style="margin-right: 5px; color: green"></i>
                             <span>Tickets available now</span>
@@ -28,7 +28,7 @@
             <p style="margin-bottom: 0;"><nobr>{{ result.address[0] }}</nobr>&nbsp;&nbsp;<em style="font-size: 0.7em;"><nobr>{{ result.address[1] }}</nobr></em></p>
             <hr style="width:70%;  border: 1px solid; margin-top: 0;">
 
-            <p><i class="bi bi-link-45deg" style="margin-right: 5px;"></i><b><a :href="result.link" style="text-decoration: none;">Event website</a></b></p>
+            <p v-if="result.link"><i class="bi bi-link-45deg" style="margin-right: 5px;"></i><b><a :href="result.link" style="text-decoration: none;">Event website</a></b></p>
 
             <p v-if="tickets_available" style="margin-bottom: 10px;"><i class="bi bi-ticket-detailed" style="margin-right: 5px;"></i><b>Tickets available at:</b></p>
             <ul v-if="tickets_available">
