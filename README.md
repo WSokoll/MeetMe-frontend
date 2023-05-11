@@ -9,20 +9,16 @@ This project is a frontend application built using the Vue.js framework. It is m
  - displaying details such as date, place, description, availability of tickets for a specific event
  - creating and adding events (only for logged in users)
 
-## Technology stack
- - Vue.js 3
- - CSS
- - HTML 5
- - Leaflet
-
 ## Project setup
 ```
 npm install
 ```
+### Connection to the backend application
+In order for app to work correctly, the *public/config.json* file has to be edited. The file should contain `BACKEND_URL` variable with the correct value assigned (for example: `http://localhost:8080`).
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve -- --port 8089
+npm run serve
 ```
 It is recommended to run the backend application on the port 8080, so the default port can be changed as in the example below.
 ```
@@ -42,5 +38,11 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## Technology stack
+ - Vue.js 3
+ - CSS
+ - HTML5
+ - Leaflet
+
 ## Credit
- - Icon - [Image by rawpixel.com](https://www.freepik.com/free-photo/stunning-blurred-light-abstract_2861800.htm#query=event&position=46&from_view=search&track=sph) on Freepik
+ - Background image - [Image by rawpixel.com](https://www.freepik.com/free-photo/stunning-blurred-light-abstract_2861800.htm#query=event&position=46&from_view=search&track=sph) on Freepik
